@@ -1,7 +1,7 @@
 # Events app in Flask
 
 #### Online Demo in Heroku
-https://myriadeventapi.herokuapp.com
+https://myriadevent.herokuapp.com
 
 #### Technology stack 
 | Name | Version |
