@@ -1,0 +1,150 @@
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card-block">
+                            <div class="row">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3" *ngFor="let event of events">
+                                <div class="card  shadow">
+                                    <kbd>
+                                        <span><a (click)="edit(event)" data-toggle="modal" data-target="#udpateModal"><i class="fa fa-edit"></i></a>&nbsp;<a (click)="delete(event)"  data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i></a></span>&nbsp;
+                                        <strong>{{ event.title }}</strong>
+                                    </kbd>
+                                    <div class="card-body">
+                                        <h5>{{event.datetime | date: 'MMM d, y, h:mm:ss a'}}</h5>
+                                        <small>{{ event.venue }}</small>
+                                        <p>{{ event.description }}</p>
+                                        <p>{{ event.venue_url }}</p>
+                                        <p>{{ event.signup_code }}</p>
+                                        <a href="" onclick="myFunction()" >Read more+</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="display:none">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form role="form" class="col-md-12 go-right" #myform="ngForm" (ngSubmit)="add(myform.value);">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input #title name="title" ngModel type="text" class="form-control" placeholder="Event Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea #description name="description" ngModel class="form-control" placeholder="Description" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input #datetime name="datetime" ngModel value="2016-12-18 05:06:07" type="text" class="form-control" placeholder="Date Time">
+                                </div>
+                                <!--
+<div class="form-group">
+                                    <input #datetime name="datetime" ngModel type="datetime-local"  min="2018-06-07T00:00" class="form-control" placeholder="Date Time" required>
+                                </div>
+
+                                -->
+                                
+                                <div class="form-group">
+                                    <input #venue name="venue" ngModel type="text" class="form-control" placeholder="Venue" required>
+                                </div>
+                                <div class="form-group">
+                                    <input #url name="venue_url" ngModel type="url" class="form-control" placeholder="Venue URL" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea #signup_code ngModel name="signup_code" class="form-control" placeholder="Eloqua signup form code" required></textarea>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="udpateModal" tabindex="-1" role="dialog" aria-labelledby="udpateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Update Event</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" class="col-md-12 go-right">
+                            <div class="form-group">
+                                <input id="name" name="name" type="text" class="form-control" placeholder="Event Name">
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="phone" class="form-control" placeholder="Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input id="phone" name="phone" type="tel" class="form-control" placeholder="Date Time">
+                            </div>
+                            <div class="form-group">
+                                <input id="phone" name="phone" type="tel" class="form-control" placeholder="Venue">
+                            </div>
+                            <div class="form-group">
+                                <input id="phone" name="phone" type="tel" class="form-control" placeholder="Venue URL">
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="phone" class="form-control" placeholder="Eloqua signup form code"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Event Deleted</h5>
+                        </div>
+                        <div class="modal-body">
+                            Deleted successfully.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
